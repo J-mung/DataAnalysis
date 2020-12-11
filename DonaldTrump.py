@@ -2,7 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 '''파일 불러오기'''
-trump_df = pd.read_csv('data/hashtag_donaldtrump.csv', lineterminator='\n')
+trump_df = pd.read_csv('data/likes_donaldtrump.csv', lineterminator='\n')
+'''
+#trump_df = pd.read_csv('data/hashtag_donaldtrump.csv', lineterminator='\n')
 gdp_df = pd.read_csv('data/GDP_per_capita.csv', lineterminator='\n')
 
 # GDP 리스트에서 국가명 추출
@@ -28,8 +30,9 @@ trump_df = trump_df.set_index('continent')
 # 생성한 데이터프레임 확인
 print('======================= trump_df =======================')
 print(trump_df.head())
-
+'''
 #trump_df.to_csv('data/likes_donaldtrump.csv')
+trump_df = trump_df.set_index('continent')
 
 # 각 대륙 별로 데이터프레임 구성
 continent_list = []
@@ -47,8 +50,8 @@ SouthAmerica_df = trump_df.loc['South America']
 continent_list.append(SouthAmerica_df)
 
 # 생성한 데이터프레임 확인
-print('====================== Africa_df =======================')
-print(continent_list[0])
+print('====================== Europe_df =======================')
+print(continent_list[2])
 
 # 대륙별로 좋아요 수의 평균을 구하고, 평균이 5.0을 넘는 국가만 남겨서 리스트에 저장
 for idx in range(len(continent_list)):
@@ -59,12 +62,12 @@ for idx in range(len(continent_list)):
     })
     continent_list[idx] = continent_list[idx][continent_list[idx]['likes']>5.0]
 # 생성된 데이터프레임 확인
-print('================== Africa_likes_avrg ==================')
-print(continent_list[0])
+print('================== Europe_likes_avrg ==================')
+print(continent_list[2])
 
 # 그래프 그리기
-plt.plot(continent_list[5]['country'], continent_list[5]['likes'])
+plt.plot(continent_list[2]['country'], continent_list[2]['likes'])
 plt.ylabel('likes number')
-plt.xlabel('South America\'s countries')
+plt.xlabel('Europe\'s countries')
 plt.title('Donald Trump')
 plt.show()
